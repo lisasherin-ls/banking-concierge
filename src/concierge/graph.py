@@ -8,6 +8,7 @@ import os
 
 from dotenv import load_dotenv
 from langchain.agents import create_agent
+from langchain.agents.middleware import HumanInTheLoopMiddleware, PIIMiddleware
 from langchain_openai import ChatOpenAI
 
 from concierge.context import get_prompt
@@ -28,6 +29,12 @@ graph = create_agent(
         temperature=0
     ),
     tools=TOOLS,
-    middleware=[],
+    middleware=[
+        HumanInTheLoopMiddleware(
+            interrupt_on={"transfer_funds": {
+                "allowed_decisions": ["approve", "edit", "reject"]}}),
+        PIIMiddleware(
+            "credit_card", strategy="mask", apply_to_tool_results=True, apply_to_input=True)
+        ],
     system_prompt=SYSTEM_PROMPT
 )
