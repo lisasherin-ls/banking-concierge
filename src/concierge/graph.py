@@ -1,10 +1,5 @@
-"""The Meridian National Customer Service Concierge graph.
+"""The Bank of Australia Concierge graph.
 
-A custom LangGraph StateGraph implementing the classic agent loop:
-
-    START -> agent -> (tools? -> agent)* -> END
-
-Exported as `graph` for LangSmith / LangGraph CLI deployment.
 """
 
 from __future__ import annotations

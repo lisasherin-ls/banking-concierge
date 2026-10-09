@@ -16,10 +16,10 @@ KB_DIR = Path(__file__).parent / "kb"
 
 def _make_embeddings() -> OpenAIEmbeddings:
     """Create an OpenAIEmbeddings instance."""
-    base_url = os.getenv("BASE_URL")
+
     return OpenAIEmbeddings(
         model="text-embedding-3-small",
-        base_url=base_url,
+        base_url=os.getenv("BASE_URL"),
         api_key=os.environ["LANGSMITH_API_KEY"],
     )
 
